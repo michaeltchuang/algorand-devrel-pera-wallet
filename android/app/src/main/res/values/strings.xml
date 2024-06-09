@@ -988,6 +988,9 @@
     <string name="you_need_to_opt_in">You need to opt-in to the NFT ASA ID to be able to transfer it to your wallet. Paste the ASA ID in the search bar.</string>
     <string name="you_need_to_opt_in_to">You need to opt-in to the NFT ASA ID to be able to transfer it to your wallet.</string>
 
+    <string name="staking_line1">Earn ALGO</string>
+    <string name="staking_line2">Stake tokens &amp; earn rewards</string>
+
     <string name="round">Round</string>
 
     <string name="this_asset_is">This asset is already pending removal.</string>

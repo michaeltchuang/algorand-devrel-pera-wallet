@@ -12,6 +12,8 @@
 
 package com.algorand.android.modules.assets.profile.detail.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
@@ -209,6 +211,9 @@ class AssetDetailFragment : BaseFragment(R.layout.fragment_asset_detail), AssetA
                 isQuickActionButtonsVisible = isQuickActionButtonsVisible,
                 isSwapButtonSelected = isSwapButtonSelected
             )
+            setStaking(
+                isStakingVisible = isMarketInformationVisible
+            )
             setMarketInformation(
                 isMarketInformationVisible = isMarketInformationVisible,
                 formattedAssetPrice = formattedAssetPrice,
@@ -217,6 +222,22 @@ class AssetDetailFragment : BaseFragment(R.layout.fragment_asset_detail), AssetA
                 changePercentageIcon = changePercentageIcon,
                 changePercentageTextColor = changePercentageTextColor
             )
+        }
+    }
+
+    private fun setStaking(
+        isStakingVisible: Boolean
+    ) {
+        with(binding.stakingLayout) {
+            root.isVisible = isStakingVisible
+            root.setOnClickListener {
+                val url = "https://reti.vercel.app/"
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(browserIntent)
+            }
+            stakingTextView.apply {
+                isVisible = isStakingVisible
+            }
         }
     }
 

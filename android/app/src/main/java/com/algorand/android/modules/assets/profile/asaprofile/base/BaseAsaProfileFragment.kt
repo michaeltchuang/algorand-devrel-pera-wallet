@@ -12,6 +12,8 @@
 
 package com.algorand.android.modules.assets.profile.asaprofile.base
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
@@ -77,6 +79,9 @@ abstract class BaseAsaProfileFragment : BaseFragment(R.layout.fragment_asa_profi
                 verificationTierConfiguration = verificationTierConfiguration,
                 baseAssetDrawableProvider = baseAssetDrawableProvider,
                 hasFormattedPrice = hasFormattedPrice
+            )
+            setStaking(
+                isStakingVisible = isMarketInformationVisible
             )
             setMarketInformation(
                 isMarketInformationVisible = isMarketInformationVisible,
@@ -162,6 +167,22 @@ abstract class BaseAsaProfileFragment : BaseFragment(R.layout.fragment_asa_profi
                 flow = map { it?.asaStatusPreview }.distinctUntilChanged(),
                 collection = asaStatusPreviewCollector
             )
+        }
+    }
+
+    private fun setStaking(
+        isStakingVisible: Boolean
+    ) {
+        with(binding.stakingLayout) {
+            root.isVisible = isStakingVisible
+            root.setOnClickListener {
+                val url = "https://reti.vercel.app/"
+                val browserIntent = Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                startActivity(browserIntent)
+            }
+            stakingTextView.apply {
+                isVisible = isStakingVisible
+            }
         }
     }
 

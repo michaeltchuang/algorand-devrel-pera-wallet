@@ -105,6 +105,17 @@
         tools:text="@tools:sample/lorem[1]" />
 
     <include
+        android:id="@+id/stakingLayout"
+        layout="@layout/layout_asset_detail_staking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_xlarge"
+        android:layout_marginTop="@dimen/spacing_xxxxlarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetPriceTextView" />
+
+    <include
         android:id="@+id/marketInformationLayout"
         layout="@layout/layout_asset_detail_market_information"
         android:layout_width="0dp"
@@ -113,7 +124,7 @@
         android:layout_marginTop="@dimen/spacing_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetPriceTextView" />
+        app:layout_constraintTop_toBottomOf="@id/stakingLayout" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/assetAboutFragmentContainerView"
