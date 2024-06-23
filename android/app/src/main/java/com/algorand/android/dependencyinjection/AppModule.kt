@@ -16,6 +16,7 @@ import android.app.NotificationManager
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.AssetManager
 import androidx.core.content.ContextCompat
 import androidx.room.Room
 import com.algorand.android.core.AccountManager
@@ -32,6 +33,7 @@ import com.algorand.android.database.AlgorandDatabase.Companion.MIGRATION_9_10
 import com.algorand.android.database.ContactDao
 import com.algorand.android.database.NodeDao
 import com.algorand.android.database.NotificationFilterDao
+import com.algorand.android.database.ValidatorDao
 import com.algorand.android.database.WalletConnectDao
 import com.algorand.android.database.WalletConnectTypeConverters
 import com.algorand.android.ledger.LedgerBleConnectionManager
@@ -107,6 +109,12 @@ object AppModule {
     @Provides
     fun provideSettingsSharedPref(@ApplicationContext appContext: Context): SharedPreferences {
         return appContext.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    }
+
+    @Singleton
+    @Provides
+    fun providValidatorDao(database: AlgorandDatabase): ValidatorDao {
+        return database.validatorDao()
     }
 
     @Singleton
@@ -187,4 +195,10 @@ object AppModule {
     fun provideNotificationManager(@ApplicationContext appContext: Context): NotificationManager? {
         return appContext.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
     }
+
+    @Provides
+    @Singleton
+    fun provideAssetManager(
+        @ApplicationContext context: Context
+    ): AssetManager = context.assets
 }

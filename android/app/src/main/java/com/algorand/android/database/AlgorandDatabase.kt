@@ -21,6 +21,8 @@ import com.algorand.android.database.AlgorandDatabase.Companion.LATEST_DB_VERSIO
 import com.algorand.android.models.Node
 import com.algorand.android.models.NotificationFilter
 import com.algorand.android.models.User
+import com.algorand.android.models.Validator
+import com.algorand.android.models.ValidatorPool
 import com.algorand.android.modules.walletconnect.client.v1.data.model.WalletConnectSessionAccountEntity
 import com.algorand.android.modules.walletconnect.client.v1.data.model.WalletConnectSessionEntity
 import com.algorand.android.modules.walletconnect.client.v1.data.model.WalletConnectV1SessionRequestIdEntity
@@ -35,7 +37,9 @@ import com.algorand.android.modules.walletconnect.client.v1.data.model.WalletCon
         WalletConnectSessionEntity::class,
         WalletConnectSessionAccountEntity::class,
         WalletConnectV1SessionRequestIdEntity::class,
-        WalletConnectV1TransactionRequestIdEntity::class
+        WalletConnectV1TransactionRequestIdEntity::class,
+        Validator::class,
+        ValidatorPool::class
     ],
     version = LATEST_DB_VERSION,
     exportSchema = true
@@ -44,11 +48,12 @@ import com.algorand.android.modules.walletconnect.client.v1.data.model.WalletCon
 abstract class AlgorandDatabase : RoomDatabase() {
     abstract fun contactDao(): ContactDao
     abstract fun nodeDao(): NodeDao
+    abstract fun validatorDao(): ValidatorDao
     abstract fun notificationFilterDao(): NotificationFilterDao
     abstract fun walletConnect(): WalletConnectDao
 
     companion object {
-        const val LATEST_DB_VERSION = 12
+        const val LATEST_DB_VERSION = 13
 
         val MIGRATION_3_4 = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {

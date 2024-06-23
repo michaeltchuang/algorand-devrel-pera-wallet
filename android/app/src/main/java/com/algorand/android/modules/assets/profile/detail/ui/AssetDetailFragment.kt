@@ -12,8 +12,6 @@
 
 package com.algorand.android.modules.assets.profile.detail.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
@@ -51,8 +49,8 @@ import com.algorand.android.utils.setDrawable
 import com.algorand.android.utils.viewbinding.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import java.math.BigDecimal
 import kotlinx.coroutines.flow.map
+import java.math.BigDecimal
 
 @AndroidEntryPoint
 class AssetDetailFragment : BaseFragment(R.layout.fragment_asset_detail), AssetAboutFragment.AssetAboutTabListener,
@@ -228,12 +226,15 @@ class AssetDetailFragment : BaseFragment(R.layout.fragment_asset_detail), AssetA
     private fun setStaking(
         isStakingVisible: Boolean
     ) {
+        val accountAddress = assetDetailViewModel.accountAddress
         with(binding.stakingLayout) {
             root.isVisible = isStakingVisible
             root.setOnClickListener {
-                val url = "https://reti.vercel.app/"
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(browserIntent)
+                nav(
+                    AssetDetailFragmentDirections.actionAssetDetailFragmentToValidatorSearchFragment(
+                        accountAddress
+                    )
+                )
             }
             stakingTextView.apply {
                 isVisible = isStakingVisible

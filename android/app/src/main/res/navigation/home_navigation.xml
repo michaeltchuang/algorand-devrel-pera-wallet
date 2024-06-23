@@ -1018,7 +1018,6 @@
         android:name="com.algorand.android.ui.contacts.editcontact.EditContactQrScannerFragment"
         android:label="EditContactQrScannerFragment"
         tools:layout="@layout/fragment_qr_code_scanner" />
-
     <fragment
         android:id="@+id/accountsQrScannerFragment"
         android:name="com.algorand.android.ui.accounts.AccountsQrScannerFragment"

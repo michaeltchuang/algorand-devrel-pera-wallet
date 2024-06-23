@@ -144,14 +144,26 @@ android {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+
     buildFeatures {
         viewBinding true
         buildConfig = true
+        compose = true
     }
     namespace application.applicationId
 }
 
 dependencies {
+    implementation libs.androidx.hilt.navigation.compose
+    implementation libs.androidx.navigation.compose
+    implementation libs.bundles.compose
+    implementation libs.bundles.lifecycle
+    implementation libs.coil.compose
+    implementation libs.kotlinx.serialization.json
+
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libVersions.coroutines}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libVersions.coroutines}"

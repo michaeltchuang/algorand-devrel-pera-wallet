@@ -21,6 +21,8 @@ import com.algorand.android.network.IndexerApi
 import com.algorand.android.network.IndexerInterceptor
 import com.algorand.android.network.MobileAlgorandApi
 import com.algorand.android.network.MobileHeaderInterceptor
+import com.algorand.android.network.NfdApi
+import com.algorand.android.ui.staking.helpers.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.hipo.hipoexceptionsandroid.RetrofitErrorHandler
@@ -28,13 +30,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Module which provides all required dependencies about network
@@ -90,6 +92,20 @@ object NetworkModule {
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(algodInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(TIMEOUT_CONSTANT, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_CONSTANT, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_CONSTANT, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @Named("nfdHttpClient")
+    fun provideNfdHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .connectTimeout(TIMEOUT_CONSTANT, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_CONSTANT, TimeUnit.SECONDS)
@@ -179,6 +195,24 @@ object NetworkModule {
             .build()
     }
 
+    /**
+     * Provides the Retrofit object.
+     * @return the Retrofit object
+     */
+    @Provides
+    @Singleton
+    @Named("nfdRetrofitInterface")
+    internal fun provideNfdRetrofitInterface(
+        @Named("nfdHttpClient") nfdHttpClient: OkHttpClient,
+        gson: Gson
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(Constants.RETI_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(nfdHttpClient)
+            .build()
+    }
+
     @Provides
     @Singleton
     @Named("indexerRetrofitInterface")
@@ -213,6 +247,14 @@ object NetworkModule {
         @Named("algodRetrofitInterface") algodRetrofitInterface: Retrofit
     ): AlgodApi {
         return algodRetrofitInterface.create(AlgodApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideNfdApi(
+        @Named("nfdRetrofitInterface") nfdRetrofitInterface: Retrofit
+    ): NfdApi {
+        return nfdRetrofitInterface.create(NfdApi::class.java)
     }
 
     @Provides

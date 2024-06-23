@@ -1,0 +1,52 @@
+[versions]
+algosdk = "2.5.0"
+agp = "8.4.2"
+androidx-activityCompose = "1.9.0"
+coil = "2.6.0"
+compose = "1.6.8"
+composeFoundation = "1.6.8"
+hiltNavigationCompose = "1.2.0"
+kotlin = "2.0.20-Beta1"
+ktlintCheck = "12.1.0"
+lifecycleCompose = "2.8.2"
+kotlinx-serialization = "1.7.0-RC"
+material3 = "1.2.1"
+navigationCompose = "2.7.7"
+
+[libraries]
+algosdk = { module = "com.algorand:algosdk", version.ref = "algosdk" }
+androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "compose" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-compose-ui-android = { module = "androidx.compose.ui:ui-android", version.ref = "compose" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleCompose" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleCompose" }
+androidx-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "lifecycleCompose" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+[bundles]
+
+compose = [
+    "androidx-compose-foundation",
+    "androidx-compose-material3",
+    "androidx-compose-ui",
+    "androidx-compose-ui-android",
+    "androidx-compose-ui-tooling"
+]
+lifecycle = [
+    "androidx-lifecycle-runtime-compose",
+    "androidx-lifecycle-viewmodel-compose",
+    "androidx-lifecycle-viewmodel-savedstate"
+]
+
+[plugins]
+
+android-application = { id = "com.android.application", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+
+

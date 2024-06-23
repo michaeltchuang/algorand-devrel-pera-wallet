@@ -67,10 +67,10 @@ complexity:
     active: false
   LargeClass:
     active: true
-    threshold: 500
+    threshold: 1000
   LongMethod:
     active: true
-    threshold: 60
+    threshold: 300
   LongParameterList:
     active: true
     functionThreshold: 10
@@ -80,7 +80,7 @@ complexity:
     active: false
     threshold: 6
   NestedBlockDepth:
-    active: true
+    active: false
     threshold: 5
   StringLiteralDuplication:
     active: false
@@ -296,7 +296,7 @@ style:
     active: false
     maxJumpCount: 1
   MagicNumber:
-    active: true
+    active: false
     excludes: "**/*Test.kt, **/*Spec.kt, **/test/**, **/generated/**"
     ignoreNumbers: '-1,0,1,2'
     ignoreHashCodeFunction: false

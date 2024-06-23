@@ -177,7 +177,7 @@ abstract class BaseAsaProfileFragment : BaseFragment(R.layout.fragment_asa_profi
             root.isVisible = isStakingVisible
             root.setOnClickListener {
                 val url = "https://reti.vercel.app/"
-                val browserIntent = Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(browserIntent)
             }
             stakingTextView.apply {

@@ -67,6 +67,13 @@
                 app:nullable="true" />
         </action>
         <action
+            android:id="@+id/action_assetDetailFragment_to_validatorSearchFragment"
+            app:destination="@id/ValidatorSearchFragment">
+            <argument
+                android:name="accountAddress"
+                app:argType="string" />
+        </action>
+        <action
             android:id="@+id/action_assetDetailFragment_to_showQrNavigation"
             app:destination="@id/showQrNavigation">
             <argument
@@ -166,5 +173,13 @@
                 app:argType="string" />
         </action>
     </fragment>
-
+    <fragment
+        android:id="@+id/ValidatorSearchFragment"
+        android:name="com.algorand.android.ui.staking.ValidatorSearchFragment"
+        android:label="ValidatorSearchFragment"
+        tools:layout="@layout/fragment_validator_search" >
+        <argument
+            android:name="accountAddress"
+            app:argType="string" />
+    </fragment>
 </navigation>
